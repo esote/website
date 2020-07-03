@@ -18,7 +18,7 @@ redirect_conf=$src/website/config/redirect.conf
 
 # Deploy servers.
 su -l -s /bin/ksh run-web -c "cd $src/website; $bin/web-srv >> ~/log 2>&1 &"
-su -l -s /bin/ksh run-fmtc -c "$bin/fmtc >> ~/log 2>&1 &"
+su -l -s /bin/ksh run-fmtc -c "cd $builder/indent; $bin/fmtc >> ~/log 2>&1 &"
 su -l -s /bin/ksh run-chat -c "$bin/chat >> ~/log 2>&1 &"
 su -l -s /bin/ksh run-gitweb -c "$bin/gitweb $gitweb_conf >> ~/log 2>&1 &"
 su -l -s /bin/ksh run-redirect -c "$builder/redirect/redirect.out $redirect_conf >> ~/log 2>&1 &"
