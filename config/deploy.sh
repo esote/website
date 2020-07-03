@@ -2,7 +2,7 @@
 
 set -e
 
-# Run builder.sh script
+# Run builder
 su -l -s /bin/ksh builder -c "./builder.sh"
 
 builder=/home/builder
@@ -16,11 +16,11 @@ redirect_conf=$src/website/config/redirect.conf
 pkill -9 web-srv fmtc indent.out gitweb redirect.out web-proxy || true
 
 # Deploy servers.
-su -l -s /bin/ksh run-web -c "cd $src/website; $bin/web-srv &"
-su -l -s /bin/ksh run-fmtc -c "$bin/fmtc &"
-su -l -s /bin/ksh run-chat -c "$bin/chat &"
-su -l -s /bin/ksh run-gitweb -c "$bin/gitweb $gitweb_conf &"
-su -l -s /bin/ksh run-redirect -c "$builder/redirect/redirect.out $redirect_conf &"
+su -l -s /bin/ksh run-web -c "cd $src/website; $bin/web-srv >> log 2>&1 &"
+su -l -s /bin/ksh run-fmtc -c "$bin/fmtc >> log 2>&1 &"
+su -l -s /bin/ksh run-chat -c "$bin/chat >> log 2>&1 &"
+su -l -s /bin/ksh run-gitweb -c "$bin/gitweb $gitweb_conf >> log 2>&1 &"
+su -l -s /bin/ksh run-redirect -c "$builder/redirect/redirect.out $redirect_conf >> log 2>&1 &"
 
 su -l -s /bin/ksh run-proxy
 
