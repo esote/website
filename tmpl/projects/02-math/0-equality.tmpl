@@ -1,0 +1,86 @@
+{
+	"Title": "Unsolved inequality",
+	"Badges": [
+		{"Name": "c++", "Style": "cpp"}
+	]
+}
+
+{{define "in"}}
+<p>The following inequality resulted from <a
+href="https://en.wikipedia.org/wiki/Waring%27s_problem">Waring's problem</a>.
+Paraphrased from Wikipedia:</p>
+
+<blockquote>
+	<p>Are there any positive integers <var>k</var> &ge; 6 such that:</p>
+
+	<img src="/img/math/func/equality.svg" title="3^{k}-2^{k}\left\lfloor
+	\left({\tfrac {3}{2}}\right)^{k}\right\rfloor
+	>2^{k}-\left\lfloor \left({\tfrac {3}{2}}\right)^{k}\right\rfloor
+	-2" alt="3^{k}-2^{k}\left\lfloor \left({\tfrac
+	{3}{2}}\right)^{k}\right\rfloor
+	>2^{k}-\left\lfloor \left({\tfrac {3}{2}}\right)^{k}\right\rfloor
+	-2">
+
+	<p>Mahler proved that there could only be a finite number of
+	<var>k</var>; none are known.</p>
+</blockquote>
+
+<p>Kubina and Wunderlich, in their book <i><a
+href="http://www.ams.org/journals/mcom/1990-55-192/S0025-5718-1990-1035936-6/S0025-5718-1990-1035936-6.pdf">Extending
+Waring's conjecture to 471,600,000</a></i>, have shown that any such
+<var>k</var> would need be larger than 471,600,000.</p>
+
+<p>It is conjectured, but not proven, that no such <var>k</var> exist. I have
+been unable to find a name for this specific inequality. From what I have found,
+it is not called "Waring's problem" but instead is a result of Waring's
+problem.</p>
+
+<h2>Unsolved-inequality.cpp</h2>
+
+<p>Change the value of <code>PRECISION</code> to increase the maximum
+<var>k</var> (or more accurately the maximum <img src="/img/math/func/3k.svg"
+title="3^k" alt="3^k"> that the program can reach. You can also change the
+starting <var>k</var> by changing the value of <code>k = 6</code> below the
+beginning of the main function. This program is not optimized, and there are
+definitely better ways to brute-force this inequality.</p>
+
+<p>This program was tested using the g++ compiler. I recommend using -Ofast.
+Below is a comparison of run times until precision is exceeded using the
+different <a
+href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">optimization
+flags</a>. While my system will be different from others, the relative time
+improvements are what is important.</p>
+
+<table>
+	<thead>
+		<tr>
+			<th>Optimization Flag</th>
+			<th>Real Time</th>
+		</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>None</td>
+		<td>11m 40.775s</td>
+	</tr>
+	<tr>
+		<td>-O1 (-O)</td>
+		<td>3m 59.017s</td>
+	</tr>
+	<tr>
+		<td>-O2</td>
+		<td>2m 47.888s</td>
+	</tr>
+	<tr>
+		<td>-O3</td>
+		<td>1m 50.419s</td>
+	</tr>
+	<tr>
+		<td>-Ofast</td>
+		<td>1m 47.860s</td>
+	</tr>
+	</tbody>
+</table>
+
+<p>So, use -Ofast or -O3 unless you have time to kill.</p>
+{{end}}

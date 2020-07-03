@@ -1,0 +1,408 @@
+{
+	"Title": "math-consts",
+	"Desc": "library for calculating many mathematical constants",
+	"Badges": [
+		{"Name": "c++", "Style": "cpp"},
+		{"Name": "lib", "Style": "pkg"}
+	]
+}
+
+{{define "in"}}
+<p>My mathematical constants project is a library of C++ templates that work to
+calculate certain mathematical constants. I use <a
+href="http://www.boost.org/">Boost</a> for mathematical functions (such as the
+Riemann zeta function) and basic constants (such as &pi;). The list of
+mathematical constants is from <a
+href="http://www.ebyte.it/library/educards/constants/MathConstants.html">this
+website</a>.</p>
+
+<p>Program was tested with <code>g++</code>. I recommend compiling with the
+<code>-O3</code> flag. The library has been tested with C++17, C++14, and C++11.
+To call a constant, use the following syntax:</p>
+
+<ul>
+	<li><code>constant::constant_name&lt;T&gt;()</code> for most constants
+		<ul>
+			<li>ex: <code>constant::euler_mascheroni&lt;double&gt;()</code></li>
+		</ul>
+	</li>
+	<li><code>constant::func::champernowne&lt;T&gt;(b)</code> and
+	<code>constant::func::favard&lt;T&gt;(r)</code> for Champernowne and
+	Favard constants</li>
+</ul>
+
+<p>All constants have been verified to be accurate to 100 digits with <b>two</b>
+digits of rounding error, except the following constants:</p>
+
+<ul>
+	<li>Alladi-Grinstead constant: 1 extra digit error</li>
+	<li>Gauss constant: 1 extra digit error</li>
+	<li>Niven constant: 3 extra digits error</li>
+	<li>Sierpinski constant K: 2 extra digits error</li>
+	<li>Sierpinski constant S: 1 extra digit error</li>
+	<li>Weierstrass constant: 1 extra digit error</li>
+</ul>
+
+<p>To avoid rounding error, increase the accuracy of your type. Rounding error
+does not increase linearly, but rather sub-linearly: going from 100 to 500
+digits of accuracy does not quintuple the rounding error, instead it goes from 2
+digits to 3 for most constants. Most constants extend to many digits of accuracy
+without issue, except the Alladi-Grinstead constant, which becomes very slow at
+higher accuracy (greater than ~100).</p>
+
+<p>I use <a href="https://github.com/catchorg/Catch2">Catch</a> for unit testing.</p>
+
+<h3>The Constants</h3>
+
+<ul>
+
+<li>Alladi-Grinstead constant
+<a href="https://oeis.org/A085291">A085291</a>,
+<a href="http://mathworld.wolfram.com/Alladi-GrinsteadConstant.html">MathWorld</a>
+</li>
+
+<li>Apéry's constant
+<a href="https://oeis.org/A002117">A002117</a>,
+<a href="http://mathworld.wolfram.com/AperysConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Ap%C3%A9ry's_constant">Wiki</a>
+</li>
+
+<li>Buffon's constant
+<a href="https://oeis.org/A060294">A060294</a>
+</li>
+
+<li>Catalan's constant
+<a href="https://oeis.org/A006752">A006752</a>,
+<a href="http://mathworld.wolfram.com/CatalansConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Catalan's_constant">Wiki</a>
+</li>
+
+<li>Champernowne constants C_b
+<a href="http://mathworld.wolfram.com/ChampernowneConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Champernowne_constant">Wiki</a>
+</li>
+
+<li>Delian constant
+<a href="https://oeis.org/A002580">A002580</a>,
+<a href="http://mathworld.wolfram.com/DelianConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Doubling_the_cube">Wiki</a>
+</li>
+
+<li>e (Euler's number, Napier's constant)
+<a href="https://oeis.org/A001113">A001113</a>,
+<a href="http://mathworld.wolfram.com/e.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/E_(mathematical_constant)">Wiki</a>
+</li>
+
+<li>Erdős-Borwein constant
+<a href="https://oeis.org/A065442">A065442</a>,
+<a href="http://mathworld.wolfram.com/Erdos-BorweinConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Borwein_constant">Wiki</a>
+</li>
+
+<li>Euler-Mascheroni constant
+<a href="https://oeis.org/A001620">A001620</a>,
+<a href="http://mathworld.wolfram.com/Euler-MascheroniConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Mascheroni_constant">Wiki</a>
+</li>
+
+<li>Favard Constants K_r
+<a href="http://mathworld.wolfram.com/FavardConstants.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Favard_constant">Wiki</a>
+</li>
+
+<li>Gauss' constant
+<a href="https://oeis.org/A014549">A014549</a>,
+<a href="http://mathworld.wolfram.com/GausssConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Gauss's_constant">Wiki</a>
+</li>
+
+<li>Gelfond-Schneider constant
+<a href="https://oeis.org/A007507">A007507</a>,
+<a href="http://mathworld.wolfram.com/Gelfond-SchneiderConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Gelfond%E2%80%93Schneider_constant">Wiki</a>
+</li>
+
+<li>Gelfond's constant
+<a href="https://oeis.org/A039661">A039661</a>,
+<a href="http://mathworld.wolfram.com/GelfondsConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Gelfond's_constant">Wiki</a>
+</li>
+
+<li>Gieseking's constant
+<a href="https://oeis.org/A143298">A143298</a>,
+<a href="http://mathworld.wolfram.com/GiesekingsConstant.html">MathWorld</a>
+</li>
+
+<li>Glaisher-Kinkelin constant
+<a href="https://oeis.org/A074962">A074962</a>,
+<a href="http://mathworld.wolfram.com/Glaisher-KinkelinConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Glaisher%E2%80%93Kinkelin_constant">Wiki</a>
+</li>
+
+<li>Golden ratio
+<a href="https://oeis.org/A001622">A001622</a>,
+<a href="http://mathworld.wolfram.com/GoldenRatio.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Golden_ratio">Wiki</a>
+</li>
+
+<li>i (Imaginary unit, as a complex conjugate)
+<a href="http://mathworld.wolfram.com/i.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Imaginary_unit">Wiki</a>
+</li>
+
+<li>Inverse golden ratio (golden ratio conjugate)
+<a href="https://oeis.org/A094214">A094214</a>,
+<a href="http://mathworld.wolfram.com/GoldenRatioConjugate.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Golden_ratio#Golden_ratio_conjugate">Wiki</a>
+</li>
+
+<li>Khinchin's constant
+<a href="https://oeis.org/A002210">A002210</a>,
+<a href="http://mathworld.wolfram.com/KhinchinsConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Khinchin%27s_constant">Wiki</a>
+</li>
+
+<li>Khinchin-Lévy constant
+<a href="https://oeis.org/A100199">A100199</a>,
+<a href="http://mathworld.wolfram.com/LevyConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/L%C3%A9vy's_constant">Wiki</a>
+</li>
+
+<li>Kinkelin constant
+<a href="https://oeis.org/A084448">A084448</a>
+</li>
+
+<li>Knuth's random-generators constant
+<a href="https://oeis.org/A156309">A156309</a>
+</li>
+
+<li>Lévy's constant
+<a href="https://oeis.org/A086702">A086702</a>,
+<a href="http://mathworld.wolfram.com/LevyConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/L%C3%A9vy's_constant">Wiki</a>
+</li>
+
+<li>Lieb's square ice constant
+<a href="https://oeis.org/A118273">A118273</a>,
+<a href="http://mathworld.wolfram.com/LiebsSquareIceConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Lieb's_square_ice_constant">Wiki</a>
+</li>
+
+<li>Loch's constant
+<a href="https://oeis.org/A086819">A086819</a>,
+<a href="http://mathworld.wolfram.com/LochsConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Lochs'_theorem">Wiki</a>
+</li>
+
+<li>Niven's constant
+<a href="https://oeis.org/A033150">A033150</a>,
+<a href="http://mathworld.wolfram.com/NivensConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Niven%27s_constant">Wiki</a>
+</li>
+
+<li>Norton's constant
+<a href="https://oeis.org/A143304">A143304</a>,
+<a href="http://mathworld.wolfram.com/NortonsConstant.html">MathWorld</a>
+</li>
+
+<li>Omega constant
+<a href="https://oeis.org/A030178">A030178</a>,
+<a href="http://mathworld.wolfram.com/OmegaConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Omega_constant">Wiki</a>
+</li>
+
+<li>One
+<a href="http://mathworld.wolfram.com/1.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/1">Wiki</a>
+</li>
+
+<li>Pi (&pi;, Archimedes' constant)
+<a href="https://oeis.org/A000796">A000796</a>,
+<a href="http://mathworld.wolfram.com/Pi.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Pi">Wiki</a>
+</li>
+
+<li>Plastic number
+<a href="https://oeis.org/A060006">A060006</a>,
+<a href="http://mathworld.wolfram.com/PlasticConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Plastic_number">Wiki</a>
+</li>
+
+<li>Pogson's ratio
+<a href="https://oeis.org/A189824">A189824</a>,
+<a href="http://mathworld.wolfram.com/PogsonsRatio.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Apparent_magnitude">Wiki</a>
+</li>
+
+<li>Polya's random-walk constant p(3)
+<a href="https://oeis.org/A086230">A086230</a>,
+<a href="http://mathworld.wolfram.com/PolyasRandomWalkConstants.html">MathWorld</a>
+</li>
+
+<li>Porter's constant
+<a href="https://oeis.org/A086237">A086237</a>,
+<a href="http://mathworld.wolfram.com/PortersConstant.html">MathWorld</a>
+</li>
+
+<li>Prince Rupert's cube constant
+<a href="https://oeis.org/A093577">A093577</a>,
+<a href="http://mathworld.wolfram.com/PrinceRupertsCube.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Prince_Rupert's_cube">Wiki</a>
+</li>
+
+<li>Pythagoras' constant
+<a href="https://oeis.org/A002193">A002193</a>,
+<a href="http://mathworld.wolfram.com/PythagorassConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Square_root_of_2">Wiki</a>
+</li>
+
+<li>Robbins constant
+<a href="https://oeis.org/A073012">A073012</a>,
+<a href="http://mathworld.wolfram.com/RobbinsConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Robbins_constant">Wiki</a>
+</li>
+
+<li>Sierpinski constant K
+<a href="https://oeis.org/A062089">A062089</a>,
+<a href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski's_constant">Wiki</a>
+</li>
+
+<li>Sierpinski constant S
+<a href="https://oeis.org/A241017">A241017</a>,
+<a href="http://mathworld.wolfram.com/SierpinskiConstant.html">MathWorld</a>
+</li>
+
+<li>Silver ratio
+<a href="https://oeis.org/A014176">A014176</a>,
+<a href="http://mathworld.wolfram.com/SilverRatio.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Silver_ratio">Wiki</a>
+</li>
+
+<li>Theodorus' constant
+<a href="https://oeis.org/A002194">A002194</a>,
+<a href="http://mathworld.wolfram.com/TheodorussConstant.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/Square_root_of_3">Wiki</a>
+</li>
+
+<li>Twenty-Vertex entropy constant
+<a href="https://oeis.org/A104956">A104956</a>,
+<a href="http://mathworld.wolfram.com/Twenty-VertexEntropyConstant.html">MathWorld</a>
+</li>
+
+<li>Weierstrass constant <img src="/img/math/consts/weierstrass.svg"
+	title="\frac{1}{2}\sigma(1|1,i)"
+	alt="\frac{1}{2}\sigma(1|1,i)">
+<a href="https://oeis.org/A094692">A094692</a>,
+<a href="http://mathworld.wolfram.com/WeierstrassConstant.html">MathWorld</a>
+</li>
+
+<li>Wyler's constant
+<a href="https://oeis.org/A180872">A180872</a>,
+<a href="http://mathworld.wolfram.com/WylersConstant.html">MathWorld</a>
+</li>
+
+<li>Zero
+<a href="http://mathworld.wolfram.com/Zero.html">MathWorld</a>,
+<a href="https://en.wikipedia.org/wiki/0">Wiki</a>
+</li>
+</ul>
+
+<h3>The Unfinished Constants</h3>
+
+<ul>
+	<li>Artin's constant</li>
+	<li>Backhouse constant
+	<ul>
+		<li>Inverse of Backhouse constant</li>
+	</ul>
+	</li>
+	<li>Barban's constant</li>
+	<li>Bernstein's constant</li>
+	<li>Besicovitch constant</li>
+	<li>Blazys constant</li>
+	<li>Boling's constant</li>
+	<li>Brun's constant B2
+	<ul>
+		<li>Brun's constant B4</li>
+		<li>Brun's constant B'4</li>
+	</ul>
+	</li>
+	<li>Cahen's constant</li>
+	<li>Copeland-Erdös constant</li>
+	<li>Conway's constant</li>
+	<li>Dottie number</li>
+	<li>Efimov's scaling constant</li>
+	<li>Embree-Trefethen constant</li>
+	<li>Feigenbaum reduction parameter α</li>
+	<li>Feigenbaum bifurcation velocity δ</li>
+	<li>Feller-Tornier constant</li>
+	<li>Flajolet-Odlyzko constant</li>
+	<li>Foias constant
+	<ul>
+		<li>Foias-Ewing constant</li>
+	</ul>
+	</li>
+	<li>Fransén-Robinson constant</li>
+	<li>Gauss-Kuzmin-Wirsing constant</li>
+	<li>Gerver's moving sofa constant</li>
+	<li>Gibbs constant G
+	<ul>
+		<li>Wilbraham-Gibbs constant G'</li>
+	</ul>
+	</li>
+	<li>Golomb–Dickman constant</li>
+	<li>Gompertz constant</li>
+	<li>Graham's constant G(3)</li>
+	<li>Grossman's constant</li>
+	<li>Heath-Brown–Moroz constant</li>
+	<li>Kempner-Mahler number</li>
+	<li>Kolakoski constant</li>
+	<li>Komornik-Loreti constant</li>
+	<li>Landau-Ramanujan constant</li>
+	<li>Lagrange numbers</li>
+	<li>Laplace limit constant</li>
+	<li>Linnik's constant</li>
+	<li>Liouville's constant</li>
+	<li>Madelung's constant</li>
+	<li>Meissel-Mertens constant</li>
+	<li>Mills' constant</li>
+	<li>Minkowski-Bower constant</li>
+	<li>MRB constant
+	<ul>
+		<li>Oscillatory-integral MRB constant, modulus</li>
+		<li>Oscillatory-integral MRB constant, real part</li>
+		<li>Oscillatory-integral MRB constant, imag part</li>
+	</ul>
+	</li>
+	<li>Murata's constant</li>
+	<li>Odlyzko-Wilf constant</li>
+	<li>Otter's constant
+	<ul>
+		<li>Otter's asymptotic constant βu</li>
+		<li>Otter's asymptotic constant βr</li>
+	</ul>
+	</li>
+	<li>Plouffe's constant</li>
+	<li>Prévost's constant
+	<ul>
+		<li>Reciprocal even Fibonacci constant</li>
+		<li>Reciprocal odd Fibonacci constant</li>
+	</ul>
+	</li>
+	<li>Rényi's parking constant</li>
+	<li>Salem number</li>
+	<li>Sarnak's constant</li>
+	<li>Schwarzschild constant</li>
+	<li>Shall-Wilson constant</li>
+	<li>Soldner's constant</li>
+	<li>Somos' quadratic recurrence constant</li>
+	<li>Stieltjes constants</li>
+	<li>Taniguchi's constant</li>
+	<li>Thue-Morse constant (Prouhet-Thue-Morse constant)</li>
+	<li>Viswanath's constant</li>
+	<li>Wallis' constant</li>
+	<li>Zagier's constant</li>
+	<li>Zolotarev-Schur constant</li>
+</ul>
+{{end}}

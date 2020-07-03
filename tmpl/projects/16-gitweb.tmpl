@@ -1,0 +1,24 @@
+{
+	"Title": "gitweb",
+	"Desc": "minimal Git web interface, sufficient for most small projects",
+	"Badges": [
+		{"Name": "go", "Style": "go"}
+	]
+}
+
+{{define "in"}}
+<p class="center links">
+	[<a href="https://git.esote.net">git.esote.net</a>]
+</p>
+<p>Features</p>
+<ul>
+	<li>Multiple, separate repositories</li>
+	<li>Repository references (HEAD, master, etc.)</li>
+	<li>Supports bare repositories</li>
+	<li>Typically-expensive responses are cached</li>
+	<li>Process restriction through pledge(2) and unveil(2) on OpenBSD
+	(optional)</li>
+	<li>Chroot (optional)</li>
+	<li>HTTPS (optional)</li>
+</ul>
+{{end}}

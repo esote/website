@@ -1,0 +1,77 @@
+{
+	"Title": "A new look"
+}
+
+{{define "in"}}
+<p>My site has a new look. There are a few reasons for this:</p>
+
+<ul>
+	<li>To reduce CSS bloat. CSS weighed 11 KB, it now weighs 2 KB.</li>
+
+	<li>To remove JavaScript. Previously for displaying maths I had stripped
+	down MathJax to 428 KB, but it still required JS and whitelisting custom
+	fonts to display properly. Now math is rended as an SVG, with LaTeX in
+	the <code>title</code> attribute for screen readers. On the Lambert W
+	page this reduces total page size from 454 KB to 66 KB. For the math
+	constants page, I removed most math annotations because they were
+	superfluous.</li>
+
+	<li>To clean up project documentation and remove old projects. This site
+	has gone through four iterations and each time project pages were
+	converted over to new layouts. Projects which were important to me
+	previously are no longer important. I also removed some of the project
+	pages which were manual page mdoc HTML conversions because they were
+	superfluous given the manual pages and READMEs in the projects
+	themselves.</li>
+</ul>
+
+<p>These changes also provided me an opportunity to rewrite much of my website
+generation and serving code, and to change how I deployed the various
+webservers. On the server each deployment step had its own user totalling 15
+users. This was mainly done for security under the idea that each step which
+didn't absolutely require a common user would be done under separate users.
+However, this was tedious and took up extra storage space from duplicate imports
+fetching. Now cloning and building are done under a single user, and executing
+is done under separate users. This also allows for more concurrency.</p>
+
+<ol>
+	<li>Clone and build projects, as the "builder" user (parallel)
+	<ul>
+		<li>web-gen</li>
+		<li>web-srv</li>
+		<li>web-proxy</li>
+		<li>redirect</li>
+		<li>fmtc
+		<ul>
+			<li>indent</li>
+		</ul>
+		</li>
+		<li>chat</li>
+		<li>gitweb
+		<ul>
+			<li>clone repositories to serve</li>
+		</ul>
+		</li>
+	</ul></li>
+	<li>Run web-gen and pipe in signed proof of freshness</li>
+	<li>Run projects, as "run-%s" users (parallel)
+	<ul>
+		<li>web-srv</li>
+		<li>fmtc</li>
+		<li>chat</li>
+		<li>gitweb</li>
+		<li>redirect</li>
+		<li>proxy</li>
+	</ul></li>
+</ol>
+
+<p>Soon I plan to switch <a href="https://git.esote.net">git.esote.net</a> to
+use cgit and the git daemon to support more efficient web viewing and cloning
+with the git protocol. I have been tinkering with this for a while but haven't
+found a good folder and user layout to support cgit, the git daemon, and cleanly
+pushing via ssh.</p>
+<p>I would also like to support a dark theme on this site because the white
+background is blinding at any time except midday. The CSS media feature
+<code>prefers-color-scheme</code> looks promising but requires manually updating
+<code>about:config</code> in Firefox.</p>
+{{end}}

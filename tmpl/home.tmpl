@@ -1,0 +1,58 @@
+{{define "content"}}
+<h1 class="center">Esote</h1>
+
+<p class="center links">
+	[<a href="/logs.html">Logs</a>]
+	[<a href="https://github.com/esote">GitHub</a>]
+	[<a href="https://m.do.co/c/797a8141f5c6"
+		title="Digital Ocean referral link">DO</a>]
+</p>
+
+<p>
+	<strong>Latest log:</strong>
+	<a href="{{.Log.Path}}">{{.Log.Title}}</a>
+	<span class="log-date">{{.Log.Date}}</span>
+</p>
+
+<div class="full-line"></div>
+
+<dl>
+{{range .Projects -}}
+{{- template "listing" . -}}
+{{end -}}
+</dl>
+
+<div class="full-line"></div><br>
+
+<details><summary>Proof of freshness</summary>
+<p>Website last regenerated on {{.Time}}. Public key importable from
+<a href="/dl/key.asc">esote.net</a>,
+<a href="https://pgp.mit.edu/pks/lookup?op=get&search=0xD7031603B88CE2998A0D48FBA14E64408F3CC2F2">pgp.mit.edu</a>,
+and
+<a
+href="https://sks-keyservers.net/pks/lookup?op=get&search=0xD7031603B88CE2998A0D48FBA14E64408F3CC2F2">sks-keyservers.net</a>.
+PGP:</p>
+<pre>0xD7031603B88CE2998A0D48FBA14E64408F3CC2F2</pre>
+<p>Signed proof of freshness:</p>
+<pre>{{- .Pof -}}</pre>
+</details>
+{{- end}}
+
+{{define "listing"}}
+<dt><p class="listing">
+{{- if .Path -}}
+<a href="{{.Path}}"><strong>{{.Page.Title}}</strong></a>
+{{- else -}}
+<strong>{{.Page.Title}}</strong>
+{{- end}} {{if .Desc -}} &mdash; {{.Desc}}. {{- end}}
+{{- range .Badges}} <span class="badge-{{.Style}}">[{{.Name}}]</span>{{- end -}}
+</p>
+{{if .Subprojects}}
+<dd><dl>
+{{range .Subprojects}}
+{{- template "listing" . -}}
+{{end}}
+</dl></dd>
+{{end}}
+</dt>
+{{- end}}

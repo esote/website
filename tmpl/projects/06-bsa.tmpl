@@ -1,0 +1,17 @@
+{
+	"Title": "bsa",
+	"Desc": "branch-free saturating arithmetic library",
+	"Badges": [
+		{"Name": "c", "Style": "c"},
+		{"Name": "lib", "Style": "pkg"}
+	]
+}
+
+{{define "in"}}
+<p>A library for branch-free saturating arithmetic of unsigned and signed 8, 16,
+32, and 64 addition, subtraction, division, and multiplication. "Saturate"
+meaning the values cannot underflow or overflow, but instead are limited by
+their <code>_MIN</code> and <code>_MAX</code> values respectively.</p>
+<p>Multiplication of 64-bit unsigned or signed integers is only available on
+systems with 128-bit integers <code>__{u}int64_t</code>.</p>
+{{end}}

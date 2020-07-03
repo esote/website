@@ -1,0 +1,212 @@
+{
+	"Title": "Lambert W function",
+	"Badges": [
+		{"Name": "c++", "Style": "cpp"}
+	]
+}
+
+{{define "in"}}
+<p>The Lambert W function W(x), also called the omega function or the product
+logarithm, is the inverse of the function <img
+src="/img/math/func/lambert_eq.svg" title="f(W)=We^W" alt="f(W)=We^W">. It is
+used as the solution to <a
+href="https://en.wikipedia.org/wiki/Lambert_W_function#Applications">many
+problems</a> that cannot be solved using normal methods. While the Lambert W
+function is actually a set of functions, this program focuses on its principal
+branch <img src="/img/math/func/W0.svg" title="W_0" alt="W_0">.</p>
+
+<div class="overflow"><table>
+	<caption>Example values of the Lambert W function</caption>
+	<thead>
+		<tr>
+			<th>W(x)</th>
+			<th>Result</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>W(0)</td><td>0</td></tr>
+		<tr><td>W(1)</td><td>0.56714</td></tr>
+		<tr><td>W(-1)</td><td>-0.31813+1.33723 i</td></tr>
+		<tr><td>W(i)</td><td>0.374699+0.576413 i</td></tr>
+		<tr><td>W(-i)</td><td>0.374699-0.576413 i</td></tr>
+		<tr><td>W(e)</td><td>1</td></tr>
+		<tr><td>W(-e)</td><td>0.39497...+1.78818...i</td></tr>
+	</tbody>
+</table></div>
+
+<p>The Lambert W function can be approximated using <a
+href="https://en.wikipedia.org/wiki/Lambert_W_function#Numerical_evaluation">Newton's
+method</a> and <a
+href="https://en.wikipedia.org/wiki/Halley%27s_method">Halley's method</a>,
+although methods with <a
+href="https://web.archive.org/web/20191219040046/http://numbers.computation.free.fr/Constants/Algorithms/newton.html">faster
+approximation</a> can be constructed. These methods use successive approximation
+to converge towards the value of W(x). Newton's method converges quadratically
+and Halley's method converges cubically.</p>
+
+<p>I do not include imaginary results. I take advantage of Boost to allow for
+arbitrary precision. You can change the value of <code>const int
+PRECISION</code> to increase the output precision. Often the last digit is
+rounded or not precise. This inaccuracy can be counteracted by increasing
+<code>PRECISION</code>.</p>
+
+<h3>Lambert-W-function-v1.cpp</h3>
+
+<p>This first version uses Newton's method to converge towards W(x) using the
+formula:</p>
+
+<img src="/img/math/func/lambert_v1.svg"
+title="w_{j+1}=\frac{xe^{-w_j}+w_j^2}{w_j+1}"
+alt="w_{j+1}=\frac{xe^{-w_j}+w_j^2}{w_j+1}">
+
+<p>Breakdown:</p>
+
+<ol>
+	<li><p>Gets the value of <var>x</var> in the form of a string;</p></li>
+
+	<li><p>Checks if the string contains more than one decimal
+	mark;</p></li>
+
+	<li><p>Checks if the string is in the format of a decimal fraction (so
+	not the letter "j", for example) by converting it to a double in a
+	try-catch block;</p></li>
+
+	<li><p>Converts it to the <code>arbFloat</code> data type, the name I
+	chose for Boost's multiprecision <code>cpp_dec_float</code>;</p></li>
+
+	<li><p>Number is checked to see if it is less than zero (which would
+	return a complex number);</p></li>
+
+	<li><p>Calculations (explained a few lines down).</p></li>
+</ol>
+
+<p>In this version, there is a bound on the input of <var>x</var> &le; 1E9.
+Inside of the for loop, it is simple:</p>
+
+<ol>
+	<li><p>Convert initial value of <code>wnew</code> to a string, and set the
+	string's precision;</p></li>
+
+	<li><p>Use the simplified Newton's method to approximate W(x);</p></li>
+
+	<li><p>Convert the value of <code>wnew</code> after calculations to a
+	string, and set the strings precision;</p></li>
+
+	<li><p>Compare the pre-calculation string and post-calculation string: if
+	they are the same, it means the precision was exceeded.</p></li>
+</ol>
+
+<h3>Lambert-W-function-v2.cpp</h3>
+<ul>
+	<li><p>Originally, I was using Newton's method, which converges
+	quadratically. Now I am using Halley's method, which converges
+	cubically. This is much faster when finding larger values:</p>
+	<div class="overflow">
+	<img src="/img/math/func/lambert_v2.svg"
+	title="w_{j+1}=-\frac{w_je^{w_j}-x}{e^{w_j}(w_j+1)-\frac{(w_j+2)(w_je^{w_j}-x)}{2w_j+2}}"
+	alt="w_{j+1}=-\frac{w_je^{w_j}-x}{e^{w_j}(w_j+1)-\frac{(w_j+2)(w_je^{w_j}-x)}{2w_j+2}}">
+	</div>
+	</li>
+
+	<li><p>I am new using <code>std::getline</code> instead of
+	<code>std::cin</code>;</p></li>
+
+	<li><p>In the Boolean function <code>isStringValid</code>, I am now
+	checking the following things:
+		<ol>
+			<li><p>Spaces in the string;</p></li>
+
+			<li><p>Multiple decimal marks in the string, optimized from
+			the previous version;</p></li>
+
+			<li><p>If, when converted to an <code>arbFloat</code>,
+			it results in a runtime error (usually due to an
+			extremely large value like <img
+			src="/img/math/func/10_10_10.svg" title="10^{10^{10}}"
+			alt="10^{10^{10}}">, or an incorrect data type, like
+			<code>null</code>);</p></li>
+
+			<li><p>If, when converted to an <code>arbFloat</code>, it
+			results in a non-runtime error (usually due to the input
+			not being a number);</p></li>
+
+			<li><p>If the user intentionally entered
+			<code>NaN</code>.</p></li>
+		</ol>
+	</p></li>
+
+	<li><p>In the Boolean function <code>isNumberValid</code>, I am now
+	checking the following:
+
+		<ol>
+			<li><p>If the input is less than 0, which is a complex
+			number;</p></li>
+
+			<li><p>If the input is infinity (or at least perceived
+			as infinity), this is the result of either inputs like
+			<img src="/img/math/func/10_10_9.svg" title="10^{10^9}"
+			alt="10^{10^9}"> (which is smaller than the catch for
+			parsing errors, but too large to be computed), or if the
+			value <code>INF</code> is intentionally
+			entered.</p></li>
+		</ol>
+	</p></li>
+
+	<li><p>Originally, the starting guess was 0, but now guessing is
+	smarter;</p></li>
+
+	<li><p>Replaced for-loop with do-while loop, because the limit <code>i
+	&lt; 1E99</code> is unnecessary with the other range checks;</p></li>
+
+	<li><p>Originally, I used Boost's <code>.convert_to</code> for the
+	string-to-<code>arbFloat</code> conversion, but now I use
+	<code>static_cast</code>. The string-to-<code>arbFloat</code> and string
+	resizing has been abstracted to an inline function
+	<code>resizeArbtoString()</code>;</p></li>
+
+	<li><p>All of the functions now take constant-referenced arguments, to
+	avoid pointlessly copying the variable.</p></li>
+</ul>
+
+<p>With the new improvements, the value of W(x) within a computable range can be
+calculated in seconds with around 5 iterations!</p>
+
+<h3>Lambert-W-function-v3.cpp</h3>
+<ul>
+	<li><p>Moved declaration of <code>wnew</code> to its first
+	usage;</p></li>
+
+	<li><p>Switched the if-else to the ternary operator
+	<code>?:</code>;</p></li>
+
+	<li><p>Moved the declaration of the <code>preComp</code> and
+	<code>postComp</code> strings closer to their first usage;</p></li>
+
+	<li><p>Replaced the do-while loop for a for-loop, which is optimal
+	compared to the original for-loop, and the previous do-while
+	loop.</p></li>
+</ul>
+
+<h3>Lambert-W-function-v4.cpp</h3>
+
+<ul>
+	<li><p>Removed magic numbers used to return error codes and replaced
+	them with <code>enum</code>s.</p></li>
+</ul>
+
+<h4>Example</h4>
+<pre>0 <= x < inf
+W(x), x = 58491.4859194
+
+Initial Guess: 8.79912818825742701263554005635953367481999598927155403916723877200983598181966539704818806245543085
+Convergence:
+	8.79912818825742701263554005635953367481999598927155403916723877200983598181966539704818806245543085
+	8.801692453591711067034391690021038727530168930812754421891411409540457859585438570795243845704890877
+	8.801692455327469805597939732638277031925622767561811681524957334633929913212419954962801678030124737
+	8.801692455327469805597939733176608343067236688470654778832038917101125243949975035911147451410329376
+	8.801692455327469805597939733176608343067236688470654778832038917101125243949975035927206894516430969
+
+W(58491.4859194) = 8.801692455327469805597939733176608343067236688470654778832038917101125243949975035927206894516430969
+(rounded up to 100 digits, precise after 5 iterations)
+</pre>
+{{end}}

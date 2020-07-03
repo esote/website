@@ -1,0 +1,40 @@
+{
+	"Title": "pof",
+	"Desc": "collate a proof of an authorship date",
+	"Badges": [
+		{"Name": "go", "Style": "go"}
+	]
+}
+
+{{define "in"}}
+<p>Proof of Freshness. Run with:</p>
+
+<pre>$ go get github.com/esote/pof &amp;&amp; pof</pre>
+
+<p>Collate values from multiple sources. Used to prove something cannot have
+been prepared ahead of the date specified within a day or so.</p>
+
+<p>Current sources:</p>
+
+<ul>
+	<li>arXiv recently submitted preprints</li>
+	<li>Cryptocurrency block hashes (depth 10)
+		<ul>
+			<li>Bitcoin</li>
+			<li>Monero</li>
+		</ul>
+	</li>
+	<li>News (5 latest articles)
+		<ul>
+			<li>Der Spiegel international</li>
+			<li>New York Times world news</li>
+			<li>BBC world news</li>
+			<li>Reuters world news</li>
+			<li>The Economist latest updates</li>
+		</ul>
+	</li>
+	<li>NIST beacon v2</li>
+</ul>
+
+<p>Inspired by the proof of freshness used in Qubes OS' canaries.</p>
+{{end}}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="/img/icon.jpg">
+	<link rel="stylesheet" href="/css/main.css" integrity="{{.Integrity}}">
+	{{if .Title -}}
+	<title>Esote &mdash; {{.Title}}</title>
+	{{- else -}}
+	<title>Esote</title>
+	{{- end}}
+	{{- template "head" .}}
+</head>
+<body>
+	<header>
+		<p><img class="icon" src="/img/icon.jpg" alt="Esote">
+		{{if .Title -}}
+		<a href="/">esote.net</a>
+		{{- else -}}
+		esote.net
+		{{- end}}
+		{{if eq .Kind 1}}| <a href="/logs.html">Logs</a>{{end}}
+		</p>
+	</header>
+	<div class="full-line"></div>
+	<div class="content">
+	{{- template "content" .}}
+	</div>
+</body>
+</html>
+{{- define "head" -}}{{- end}}

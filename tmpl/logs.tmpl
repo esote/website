@@ -1,0 +1,10 @@
+{{define "content"}}
+<h1 class="center">Logs</h1>
+
+<p class="center"><strong>Programmer's log, stardate 47988, we are in orbit of
+planet...</strong></p>
+
+{{range .Logs -}}
+<p><a href="{{.Path}}">{{.Title}}</a> <span class="log-date">{{.Date}}</span></p>
+{{end}}
+{{end}}

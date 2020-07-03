@@ -1,0 +1,34 @@
+{
+	"Title": "cat",
+	"Desc": "implementations of the cat command to teach programming",
+	"Badges": [
+		{"Name": "asm", "Style": "asm"},
+		{"Name": "c", "Style": "c"}
+	]
+}
+
+{{define "in"}}
+<p>The goal of this repository is to provide assembly and C <code>cat</code>
+implementations to teach the following.</p>
+
+<ul>
+	<li>Interaction with the operating system directly through system
+	calls</li>
+	<li>Robust error checking</li>
+	<li>Implementation of
+	<a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/cat.html">standards-compliant</a>
+	hyphen-minus substitution to standard input</li>
+	<li>Efficient use of buffers with iteration</li>
+	<li>Writing pipe-friendly programs</li>
+</ul>
+
+<p>Assembly-specific</p>
+<ul>
+	<li>Using a variety of 64-bit registers in NASM assembly</li>
+	<li>Linux (and System V) 64-bit system calling convention</li>
+	<li>Interaction with <code>argc</code> and <code>argv</code> through the
+	stack</li>
+	<li>Taking advantage of callee-saved registers and differentiating
+	caller-saved registers</li>
+</ul>
+{{end}}

@@ -1,0 +1,17 @@
+{
+	"Title": "openshim2",
+	"Desc": "shims for the OpenBSD pledge and unveil syscalls",
+	"Badges": [
+		{"Name": "go", "Style": "go"},
+		{"Name": "pkg", "Style": "pkg"}
+	]
+}
+
+{{define "in"}}
+<p>openshim2 provides shims for the OpenBSD pledge and unveil syscalls.</p>
+<p>Unlike plain <code>golang.org/x/sys/unix</code>, openshim2 provides no-op
+function equivalents to allow compiling programs on OpenBSD and non-OpenBSD
+systems.</p>
+<p>This is a replacement for the deprecated <code>openshim</code> package (which
+used cgo shims).</p>
+{{end}}
