@@ -2,7 +2,7 @@
 
 set -e
 
-rm -rf go/
+rm -rf go/ repos/
 
 website() {
 	go get github.com/esote/website/cmd/web-gen
@@ -29,10 +29,11 @@ go get github.com/esote/chat &
 go get github.com/esote/gitweb &
 
 # Gitweb repositories
-git clone https://github.com/esote/mcc &
-git clone https://github.com/esote/opal &
-git clone https://github.com/esote/pof &
+mkdir repos
+git -C repos/ clone https://github.com/esote/mcc &
+git -C repos/ clone https://github.com/esote/opal &
+git -C repos/ clone https://github.com/esote/pof &
 
 wait
 
-cd ~/go/src/github.com/esote/website; go/bin/web-gen
+cd ~/go/src/github.com/esote/website; ~/go/bin/web-gen

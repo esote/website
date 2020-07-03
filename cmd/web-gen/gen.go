@@ -54,8 +54,8 @@ const (
 	css = "static/css/main.css"
 
 	flags = os.O_WRONLY | os.O_CREATE | os.O_TRUNC
-	fmode = 0600
-	dmode = 0700
+	fmode = 0604
+	dmode = 0705
 
 	kProject = 0
 	kLog     = 1
@@ -84,7 +84,7 @@ func main() {
 	if err = os.MkdirAll(filepath.Dir(out), dmode); err != nil {
 		log.Fatal(err)
 	}
-	if err = openshim2.Unveil(out, "wc"); err != nil {
+	if err = openshim2.Unveil(out, "rwc"); err != nil {
 		log.Fatal(err)
 	}
 	if err = openshim2.Unveil(in, "r"); err != nil {
