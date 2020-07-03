@@ -1,8 +1,9 @@
 #!/bin/sh
 
 set -e
+set -o xtrace
 
-rm -rf go/ repos/
+rm -rf go/ repos/ redirect/ indent/
 
 website() {
 	go get github.com/esote/website/cmd/web-gen
@@ -35,5 +36,7 @@ git -C repos/ clone https://github.com/esote/opal &
 git -C repos/ clone https://github.com/esote/pof &
 
 wait
+
+echo "Awaiting POF"
 
 cd ~/go/src/github.com/esote/website; ~/go/bin/web-gen
