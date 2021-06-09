@@ -3,12 +3,13 @@
 set -e
 set -o xtrace
 
-rm -rf go/ repos/ redirect/ indent/
+rm -rf repos/ redirect/ indent/ website/
 
 website() {
-	go get github.com/esote/website/cmd/web-gen
-	go get github.com/esote/website/cmd/web-srv
-	go get github.com/esote/website/cmd/web-proxy
+	go get -u github.com/esote/website/cmd/web-gen
+	go get -u github.com/esote/website/cmd/web-srv
+	go get -u github.com/esote/website/cmd/web-proxy
+	git clone https://github.com/esote/website
 }
 
 redirect() {
@@ -25,9 +26,9 @@ website &
 redirect &
 indent &
 
-go get github.com/esote/fmtc &
-go get github.com/esote/chat &
-go get github.com/esote/gitweb &
+go get -u github.com/esote/fmtc &
+go get -u github.com/esote/chat &
+go get -u github.com/esote/gitweb &
 
 # Gitweb repositories
 mkdir repos
@@ -39,4 +40,4 @@ wait
 
 echo "Awaiting POF"
 
-cd ~/go/src/github.com/esote/website; ~/go/bin/web-gen
+cd ~/website; ~/go/bin/web-gen

@@ -1,0 +1,3 @@
+PermitRootLogin yes
+PasswordAuthentication no
+AllowUsers root

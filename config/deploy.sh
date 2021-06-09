@@ -11,13 +11,12 @@ su -l -s /bin/ksh builder -c "./builder.sh"
 
 builder=/home/builder
 bin=$builder/go/bin
-src=$builder/go/src/github.com/esote
 
-gitweb_conf=$src/website/config/gitweb.conf
-redirect_conf=$src/website/config/redirect.conf
+gitweb_conf=$builder/website/config/gitweb.conf
+redirect_conf=$builder/website/config/redirect.conf
 
 # Deploy servers.
-su -l -s /bin/ksh run-web -c "cd $src/website; $bin/web-srv >> ~/log 2>&1 &"
+su -l -s /bin/ksh run-web -c "cd $builder/website; $bin/web-srv >> ~/log 2>&1 &"
 su -l -s /bin/ksh run-fmtc -c "cd $builder/indent; $bin/fmtc >> ~/log 2>&1 &"
 su -l -s /bin/ksh run-chat -c "$bin/chat >> ~/log 2>&1 &"
 su -l -s /bin/ksh run-gitweb -c "$bin/gitweb $gitweb_conf >> ~/log 2>&1 &"
