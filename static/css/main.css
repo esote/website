@@ -158,3 +158,34 @@ th, td {
 .badge-asm {
 	color: #6c4c13;
 }
+
+@media (prefers-color-scheme: dark) {
+	html {
+		background-color: #161616;
+		color: #ccc;
+	}
+
+	.full-line {
+		border-bottom-color: #ccc;
+	}
+
+	pre, code {
+		background-color: #3f3f3f;
+	}
+
+	details[open] {
+		border-left-color: #ccc;
+	}
+
+	table, th, td {
+		border-color: #ccc;
+	}
+
+	img[src$='.svg'] {
+		filter: invert(1);
+	}
+
+	a {
+		color: #1ba6c5;
+	}
+}
