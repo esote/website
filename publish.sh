@@ -1,3 +1,4 @@
+git -C ~/website pull
 rm -rf /var/www/esote.net
-cp -r ./esote.net /var/www/
+cp -r ~/website/esote.net /var/www/
 rcctl reload httpd
