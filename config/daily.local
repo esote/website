@@ -1,0 +1,15 @@
+#!/bin/ksh
+
+domain=esote.net
+
+acme-client -v $domain
+if [ $? -eq 0 ]; then
+	ocspcheck -No /etc/ssl/$domain.ocsp /etc/ssl/$domain.fullchain.pem
+	rcctl reload httpd
+fi
+
+ocspcheck -i /etc/ssl/$domain.ocsp /etc/ssl/$domain.fullchain.pem
+if [ $? -eq 0 ]; then
+	ocspcheck -No /etc/ssl/$domain.ocsp /etc/ssl/$domain.fullchain.pem
+	rcctl reload httpd
+fi

@@ -1,1 +1,0 @@
-0	0	*/10	*	*	acme-client -v esote.net && rcctl reload httpd
