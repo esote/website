@@ -1,15 +1,11 @@
 Scripts & config used in running https://esote.net on OpenBSD.
+Using IPs from the reserved range for documentation.
 
-Example IP:
-	198.51.100.3
+Public IP:
+	198.51.100.3 (gateway 198.51.100.1)
+	2001:db8::3 (gateway 2001:db8::1)
 
-Example public gateway:
-	198.51.96.1
-
-Example subnet mask:
-	255.255.240.0
-
-Example DNS nameservers:
+DNS nameservers:
 	203.0.113.29
 	203.0.113.30
 	203.0.113.31
