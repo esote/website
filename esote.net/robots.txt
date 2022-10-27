@@ -2,5 +2,4 @@ User-Agent: *
 Disallow: /404
 Disallow: /css/
 Disallow: /dl/
-Disallow: /font/
 Disallow: /img/

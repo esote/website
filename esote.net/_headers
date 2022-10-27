@@ -2,7 +2,7 @@
 	X-Frame-Options: DENY
 	X-Content-Type-Options: nosniff
 	Referrer-Policy: no-referrer
-	Content-Security-Policy: base-uri 'self'; default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self';
+	Content-Security-Policy: base-uri 'self'; default-src 'none'; style-src 'self'; img-src 'self'
 	X-XSS-Protection: 1; mode=block
 
 /dl/key.asc
