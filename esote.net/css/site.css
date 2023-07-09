@@ -19,6 +19,7 @@ li {
 
 img.center {
 	max-width: 75%;
+	height: auto;
 	display: block;
 	margin: 1rem auto;
 }
